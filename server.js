@@ -22,7 +22,7 @@ server = async () => {
     })
     app.use("/product", product)
 
-    app.listen(PROCESS.env.PORT || 3002, () => {
+    app.listen(process.env.PORT || 3002, () => {
         console.log("server started");
     })
 }
