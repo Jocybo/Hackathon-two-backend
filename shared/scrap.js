@@ -9,7 +9,7 @@ data = async () => {
             const $ = cheerio.load(res.data);
             let count = 0;
             $("._1AtVbE").each((index, ele) => {
-                if (count <= 10) {
+                if (count < 10) {
                     let productName = $(ele).find("div._4rR01T").text()
                     let productImage = $(ele).find("div.CXW8mj").children().attr("src")
                     let productRating = $(ele).find("div._3LWZlK").text()
@@ -31,17 +31,17 @@ data = async () => {
         })
         .catch((error) => {
             console.log(error)
-        })
+        }) 
 
-    let amazon = [];
-    await axios.get("https://www.amazon.in/s?k=mobiles&i=electronics&rh=n%3A1389432031%2Cp_89%3ARedmi%7CSamsung&dc&qid=1639626195&rnid=3837712031&ref=sr_nr_p_89_2  ")
+     let amazon = [];
+    await axios.get("https://www.amazon.in/s?k=mobiles&rh=n%3A1389401031&ref=nb_sb_noss")
         .then((res) => {
             const $ = cheerio.load(res.data);
             let count = 0;
-            $(".s-asin").each((index, ele) => {
+            $(".a-section").each((index, ele) => {
                 if (count < 10) {
                     let productName = $(ele).find("span.a-text-normal").text()
-                    let productImage = $(ele).find(".aok-relative").children().attr("src")
+                    let productImage = $(ele).find("div.a-section").children().attr("src")
                     let productRating = $(ele).find(".a-icon-star-small").children().text()
                     let productPrice = $(ele).find("span.a-text-price").children("span.a-offscreen").text()
                     let offerPrice = $(ele).find("span.a-price-whole").text()
@@ -59,7 +59,7 @@ data = async () => {
             })
             db.mobile.insertMany(amazon)
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err)) 
 
     // Fetch Details From SnapDeal : 
 

@@ -10,6 +10,10 @@ const mongo = require('./shared/mongodb')
 const product = require('./routes/product')
 const scrapData = require('./shared/scrap')
 
+app.get("/",(req,res)=>{
+    res.send("Web Data Scraped")
+})
+
 
 server = async () => {
     await mongo.connect()
